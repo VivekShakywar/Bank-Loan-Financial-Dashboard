@@ -1,19 +1,41 @@
 select * from [Bank Loan DB]
 
+-- Total Loan Application
 select COUNT(id) AS Total_Loan_Application from [Bank Loan DB]
 
+-- Month Wise Loan Application
 select YEAR(issue_date) AS Year, Month(issue_date) AS Month, count(id) AS Total_Loan_Application from [Bank Loan DB]
 Group by YEAR(issue_date), MONTH(issue_date)
 Order by YEAR(issue_date), MONTH(issue_date)
  
+ -- Total Funded Amount
 select SUM(loan_amount) AS Total_Funded_Amount from [Bank Loan DB]
 
+-- Month Wise Total Funded Amount
+select YEAR(issue_date) AS Year, Month(issue_date) AS Month, sum(loan_amount) AS Total_Funded_Amount from [Bank Loan DB]
+Group by YEAR(issue_date), MONTH(issue_date)
+Order by YEAR(issue_date), MONTH(issue_date)
+
+-- Total Amount Received
+SELECT SUM(total_payment) AS Total_Amount_Collected FROM [Bank Loan DB]
+
+-- Month Wise Total Amount Received
 Select YEAR(issue_date) AS Year, Month(issue_date) AS Month, SUM(total_payment) from [Bank Loan DB]
 Group by YEAR(issue_date), MONTH(issue_date)
 Order by YEAR(issue_date), MONTH(issue_date)
 
+-- Average Interest Rate
 select concat(round(avg(int_rate)*100,2),'%') as Avg_Int_Rate from [Bank Loan DB]
 
+-- Month Wise Average Interest Rate
+select concat(round(avg(int_rate)*100,2),'%') as Avg_Int_Rate from [Bank Loan DB]
+Group by YEAR(issue_date), MONTH(issue_date)
+Order by YEAR(issue_date), MONTH(issue_date)
+
+-- Average DTI
+select YEAR(issue_date), MONTH(issue_date), round(avg(dti),4)*100 as Avg_DTI from [Bank Loan DB]
+
+-- Month Wise Average DTI
 select YEAR(issue_date), MONTH(issue_date), round(avg(dti),4)*100 as Avg_DTI from [Bank Loan DB]
 group by YEAR(issue_date), MONTH(issue_date)
 order by YEAR(issue_date), MONTH(issue_date)
@@ -113,6 +135,19 @@ FROM [Bank Loan DB]
 GROUP BY home_ownership
 ORDER BY home_ownership
 
+-- I have applied multiple filters to all the dashboards. You can check the results for the filters as well by modifying the query and comparing the results.
+-- For e.g
+-- See the results when we hit the Grade A in the filters for dashboards.
+
+SELECT 
+	purpose AS PURPOSE, 
+	COUNT(id) AS Total_Loan_Applications,
+	SUM(loan_amount) AS Total_Funded_Amount,
+	SUM(total_payment) AS Total_Amount_Received
+FROM [Bank Loan DB]
+WHERE grade = 'A'
+GROUP BY purpose
+ORDER BY purpose
 
 
 
