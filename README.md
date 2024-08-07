@@ -1,5 +1,5 @@
 
-# Sales Dashboard with Copilot
+# Bank-Loan-Financial-Dashboard
 
 ### Dashboard Link : https://app.powerbi.com/groups/ccf7275c-b162-4dd3-a686-a3d7494edf07/reports/43906740-f4a1-4ee7-ad2d-55b4954b33ec/68ce2a7a3c46980002ae?experience=power-bi
 
